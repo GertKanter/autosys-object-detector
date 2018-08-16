@@ -1,0 +1,5 @@
+<launch>
+  <group ns="robot_0">
+    <node pkg="object_detector" type="object_detector_node.py" name="object_detector" output="screen"/>
+  </group>
+</launch>

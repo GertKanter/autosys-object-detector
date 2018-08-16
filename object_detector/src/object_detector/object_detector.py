@@ -6,7 +6,7 @@ class ObjectDetector:
     def __init__(self, topic_name):
         self.topic_name = topic_name
         self.subscriber = rospy.Subscriber(self.topic_name, LaserScan, self.scan_cb)
-        self.publisher = rospy.Publisher('~object_detected', Bool, queue_size=1)
+        self.publisher = rospy.Publisher('object_detected', Bool, queue_size=1)
 
     def scan_cb(self, msg):
 	previous_range = msg.ranges[0]
