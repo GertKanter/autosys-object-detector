@@ -11,13 +11,14 @@ class ObjectDetector:
     def scan_cb(self, msg):
 	previous_range = msg.ranges[0]
         detected_close = False
+        publisher_message = Bool()
+        publisher_message.data = False
         for index in range(1, len(msg.ranges)):
             current_range = msg.ranges[index]
             if current_range < previous_range - 1.0: # Detect a laser distance jump of at least 1 meter
                 detected_close = True
             else:
                 if detected_close and current_range > previous_range + 1.0: # Detect a laser distance jump of at least 1 meter
-                    publisher_message = Bool()
                     publisher_message.data = True
-                    self.publisher.publish(publisher_message)
             previous_range = msg.ranges[index]
+        self.publisher.publish(publisher_message)
